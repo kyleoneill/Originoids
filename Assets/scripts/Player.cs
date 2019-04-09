@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     private int currentHealth;
     public float invulnerabilityTime;
     public GameObject gameOverPanel;
+    public GameObject missile;
+    public int missileFireLength = 1;
 
     private float invulnerabilityTimeRemaining;
     private bool isAlive;
@@ -53,13 +55,13 @@ public class Player : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.Q))
             {
-                _rigidbody.AddTorque(-torque);
+                _rigidbody.AddTorque(torque);
             }
             if (Input.GetKey(KeyCode.E))
             {
-                _rigidbody.AddTorque(torque);
+                _rigidbody.AddTorque(-torque);
             }
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 Fire();
             }
@@ -114,7 +116,8 @@ public class Player : MonoBehaviour
 
     void Fire()
     {
-        print("bang");
+        Vector3 missileOffset = transform.position + transform.up * missileFireLength;
+        var newMissile = GameObject.Instantiate(missile, missileOffset, transform.rotation);
     }
 
     async void KillPlayer()
