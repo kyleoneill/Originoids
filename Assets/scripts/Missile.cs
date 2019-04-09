@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 /*
@@ -15,7 +16,10 @@ public class Missile : MonoBehaviour
 {
     public float speed = 200.0f;
     public int lifetime = 10;
+    public int fuse = 2;
+    public int damage = 40;
 
+    private bool alive = true;
     private Rigidbody2D _rigidbody;
 
     private float secondCounter;
@@ -33,9 +37,23 @@ public class Missile : MonoBehaviour
 
     void Update()
     {
-        secondCounter += Time.deltaTime;
-        if(secondCounter > lifetime)
+        if(alive)
         {
+            secondCounter += Time.deltaTime;
+            if (secondCounter > lifetime)
+            {
+                alive = false;
+                Explode();
+            }
+        }
+    }
+
+    async void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (alive)
+        {
+            alive = false;
+            await Task.Delay(fuse * 1000);
             Explode();
         }
     }

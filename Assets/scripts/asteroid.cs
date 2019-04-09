@@ -9,6 +9,10 @@ public class asteroid : MonoBehaviour
     public float maxSpeed = 5.0f;
     public float minRotation = -360.0f;
     public float maxRotation = 360.0f;
+    public int health = 100;
+
+    private bool alive = true;
+
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -22,6 +26,31 @@ public class asteroid : MonoBehaviour
         _rigidbody.velocity = direction * speed;
 
         _rigidbody.angularVelocity = Mathf.Lerp(minRotation, maxRotation, Random.value);
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (alive)
+        {
+            var missile = col.gameObject.GetComponent<Missile>();
+            if (missile != null)
+            {
+                UpdateHealth(-missile.damage);
+            }
+        }
+    }
+
+    void UpdateHealth(int healthChaneg)
+    {
+        if (alive)
+        {
+            health += healthChaneg;
+            if (health <= 0)
+            {
+                alive = false;
+                Destroy(gameObject);
+            }
+        }
     }
 
     void Update()

@@ -23,11 +23,18 @@ public class AsteroidSpawner : MonoBehaviour
         for(var i = 0; i < spawnedAsteroids.Count; ++i)
         {
             var currentAsteroid = spawnedAsteroids[i];
-            if((currentAsteroid.transform.position - playerTransform.position).magnitude >= asteroidDespawnField)
+            if(currentAsteroid != null)
             {
-                GameObject.Destroy(currentAsteroid.gameObject);
+                if ((currentAsteroid.transform.position - playerTransform.position).magnitude >= asteroidDespawnField)
+                {
+                    GameObject.Destroy(currentAsteroid.gameObject);
+                    spawnedAsteroids.RemoveAt(i);
+                    i = i - 1;
+                }
+            }
+            else
+            {
                 spawnedAsteroids.RemoveAt(i);
-                i = i - 1;
             }
         }
         while(spawnedAsteroids.Count < maxAsteroidCount)
