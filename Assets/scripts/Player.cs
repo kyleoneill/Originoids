@@ -61,9 +61,17 @@ public class Player : MonoBehaviour
             {
                 _rigidbody.AddTorque(-torque);
             }
+            if (Input.GetKey(KeyCode.R))
+            {
+                _rigidbody.angularVelocity = 0;
+            }
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Fire();
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
             }
             if (Input.GetKey(KeyCode.Space))
             {

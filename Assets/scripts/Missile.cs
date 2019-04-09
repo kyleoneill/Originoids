@@ -16,7 +16,7 @@ public class Missile : MonoBehaviour
 {
     public float speed = 200.0f;
     public int lifetime = 10;
-    public int fuse = 2;
+    public float fuse = 0.75f;
     public int damage = 40;
     public int explosionDamage = 100;
     public float explosionRadius = 5.0f;
@@ -56,7 +56,8 @@ public class Missile : MonoBehaviour
         if (alive)
         {
             alive = false;
-            await Task.Delay(fuse * 1000);
+            float fuseTime = fuse * 1000;
+            await Task.Delay((int)fuseTime);
             Explode();
         }
     }

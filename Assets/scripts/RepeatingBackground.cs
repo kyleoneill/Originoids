@@ -28,9 +28,9 @@ public class RepeatingBackground : MonoBehaviour
         float yCenter = Mathf.Round(_camera.transform.position.y / backgroundHeight) * backgroundHeight;
         Vector2 center = new Vector2(xCenter, yCenter);
 
-        backgroundTopLeft.position = new Vector2(center.x - backgroundWidth / 2, center.y + backgroundHeight / 2);
-        backgroundTopRight.position = new Vector2(center.x + backgroundWidth / 2, center.y + backgroundHeight / 2);
-        backgroundBottomLeft.position = new Vector2(center.x - backgroundWidth / 2, center.y - backgroundHeight / 2);
-        backgroundBottomRight.position = new Vector2(center.x + backgroundWidth / 2, center.y - backgroundHeight / 2);
+        backgroundTopLeft.position = new Vector3(center.x - backgroundWidth / 2, center.y + backgroundHeight / 2, 10);
+        backgroundTopRight.position = new Vector3(center.x + backgroundWidth / 2, center.y + backgroundHeight / 2, 10);
+        backgroundBottomLeft.position = new Vector3(center.x - backgroundWidth / 2, center.y - backgroundHeight / 2, 10);
+        backgroundBottomRight.position = new Vector3(center.x + backgroundWidth / 2, center.y - backgroundHeight / 2, 10);
     }
 }
