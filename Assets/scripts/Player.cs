@@ -59,6 +59,10 @@ public class Player : MonoBehaviour
             {
                 _rigidbody.AddTorque(torque);
             }
+            if (Input.GetKey(KeyCode.F))
+            {
+                Fire();
+            }
             if (Input.GetKey(KeyCode.Space))
             {
                 KillPlayer();
@@ -106,6 +110,11 @@ public class Player : MonoBehaviour
         {
             invulnerabilityTimeRemaining = invulnerabilityTime;
         }
+    }
+
+    void Fire()
+    {
+        print("bang");
     }
 
     async void KillPlayer()
