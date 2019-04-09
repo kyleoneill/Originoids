@@ -11,6 +11,7 @@ public class asteroid : MonoBehaviour
     public float maxRotation = 360.0f;
     public int health = 100;
     public int damage = 10;
+    public int scoreValue = 20;
 
     private bool alive = true;
 
@@ -49,6 +50,7 @@ public class asteroid : MonoBehaviour
             if (health <= 0)
             {
                 alive = false;
+                Score.Instance.AddScore(scoreValue);
                 Destroy(gameObject);
             }
         }

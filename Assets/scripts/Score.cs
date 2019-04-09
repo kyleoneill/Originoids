@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    public Player player; //Player must be linked to update score from the player?
+    public static Score Instance { get; private set; }
+    public Player player;
     public int scorePerSecond = 1;
 
     private Text winText;
@@ -15,6 +16,14 @@ public class Score : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         winText = GetComponent<Text>();
         currentScore = 0;
         winText.text = $"Score: {currentScore}";
@@ -30,5 +39,10 @@ public class Score : MonoBehaviour
             winText.text = $"Score: {currentScore}";
             secondCounter = 0;
         }
+    }
+
+    public void AddScore(int addition)
+    {
+        currentScore += addition;
     }
 }
