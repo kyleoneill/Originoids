@@ -18,7 +18,7 @@ public class cameraFollow : MonoBehaviour
 
     void Update()
     {
-        float cameraSize = Camera.main.orthographicSize; //60 is good
+        float cameraSize = Camera.main.orthographicSize;
         cameraSize -= Input.GetAxis("Mouse ScrollWheel") * sensativity;
         cameraSize = Mathf.Clamp(cameraSize, minFov, maxFov);
         Camera.main.orthographicSize = cameraSize;

@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
     {
         var asteroid = col.gameObject.GetComponent<asteroid>();
         if(asteroid != null){
-            UpdateHealth(-10);
+            ApplyDamage(asteroid.damage);
         }
     }
 
@@ -98,12 +98,12 @@ public class Player : MonoBehaviour
         return((float)currentHealth/(float)maxHealth);
     }
 
-    void UpdateHealth(int changeValue)
+    public void ApplyDamage(int damage)
     {
         if(invulnerabilityTimeRemaining > 0){
             return;
         }
-        currentHealth += changeValue;
+        currentHealth -= damage;
         if(currentHealth <= 0)
         {
             KillPlayer();
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
         gameOverPanel.SetActive(true);
         await Task.Delay(deathWaitTime);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //TODO: Reset score after score is implemented
+        //TODO: Add top score leaderboard
         //TODO: Explosion Animation
         //TODO: Explosion Sound
     }

@@ -18,6 +18,9 @@ public class Missile : MonoBehaviour
     public int lifetime = 10;
     public int fuse = 2;
     public int damage = 40;
+    public int explosionDamage = 100;
+    public float explosionRadius = 5.0f;
+    public GameObject explosionAnimation;
 
     private bool alive = true;
     private Rigidbody2D _rigidbody;
@@ -58,8 +61,30 @@ public class Missile : MonoBehaviour
         }
     }
 
+    void PlayExplosion()
+    {
+        GameObject explosion = (GameObject)Instantiate(explosionAnimation);
+        explosion.transform.position = transform.position;
+    }
+
     void Explode()
     {
+
+        Collider2D[] objectsInRange = Physics2D.OverlapCircleAll(gameObject.transform.position, explosionRadius);
+        foreach(Collider2D col in objectsInRange)
+        {
+            asteroid rock = col.GetComponent<asteroid>();
+            Player player = col.GetComponent<Player>();
+            if(rock != null)
+            {
+                rock.ApplyDamage(explosionDamage);
+            }
+            if(player != null)
+            {
+                player.ApplyDamage(explosionDamage);
+            }
+        }
+        PlayExplosion();
         Destroy(gameObject);
     }
 }

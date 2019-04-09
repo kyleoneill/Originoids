@@ -10,6 +10,7 @@ public class asteroid : MonoBehaviour
     public float minRotation = -360.0f;
     public float maxRotation = 360.0f;
     public int health = 100;
+    public int damage = 10;
 
     private bool alive = true;
 
@@ -35,16 +36,16 @@ public class asteroid : MonoBehaviour
             var missile = col.gameObject.GetComponent<Missile>();
             if (missile != null)
             {
-                UpdateHealth(-missile.damage);
+                ApplyDamage(missile.damage);
             }
         }
     }
 
-    void UpdateHealth(int healthChaneg)
+    public void ApplyDamage(int damage)
     {
         if (alive)
         {
-            health += healthChaneg;
+            health -= damage;
             if (health <= 0)
             {
                 alive = false;

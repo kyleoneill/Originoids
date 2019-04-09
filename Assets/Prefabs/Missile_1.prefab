@@ -132,6 +132,10 @@ MonoBehaviour:
   lifetime: 10
   fuse: 2
   damage: 40
+  explosionDamage: 100
+  explosionRadius: 5
+  explosionAnimation: {fileID: 3111563443801171591, guid: b57105025e3ef464f8d8f10cc5c5c907,
+    type: 3}
 --- !u!50 &7161415749303689122
 Rigidbody2D:
   serializedVersion: 4
